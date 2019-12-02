@@ -62,8 +62,13 @@ public class SqlUtil {
 		return sql;
 	}
 
-	public static String buildQueryGetAll(String tableName) {
+	public static String buildQueryGetAllOrById(String tableName) {
 		String sql = "SELECT * FROM " + tableName;
+		return sql;
+	}
+	
+	public static String buildQueryGetAllOrById(String tableName, String idAttribute, Integer id) {
+		String sql = "SELECT * FROM " + tableName + " WHERE " + idAttribute + " = " + id;
 		return sql;
 	}
 
@@ -75,7 +80,6 @@ public class SqlUtil {
 		}
 
 		stringBuilder.delete(stringBuilder.lastIndexOf(" AND "), stringBuilder.length());
-
 		return stringBuilder.toString();
 	}
 
@@ -84,5 +88,4 @@ public class SqlUtil {
 		return sql;
 	}
 	
-
 }

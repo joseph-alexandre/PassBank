@@ -9,6 +9,8 @@ public interface DaoInterface<T>  {
     public boolean removeById(Integer id);
 
     public boolean update(T thing);
+    
+    public T getById(Integer id);
 
     public List<T> getAll();
 

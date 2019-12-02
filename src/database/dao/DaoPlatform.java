@@ -9,22 +9,24 @@ import java.util.List;
 
 import database.connection.ConnectionFactory;
 import model.Login;
+import model.Platform;
 import utils.SqlUtil;
 
-public class DaoLogin implements DaoInterface<Login> {
+public class DaoPlatform implements DaoInterface<Platform> {
 
 	Connection connection;
 	PreparedStatement preparedStatement;
 
 	@Override
-	public boolean add(Login login) {
+	public boolean add(Platform platform) {
 		connection = ConnectionFactory.obterConexao();
 		int count = 1;
-		String sql = SqlUtil.buildQueryAdd("login", "username", "password");
+		String sql = SqlUtil.buildQueryAdd("platform", "name", "image", "id_login");
 		try {
 			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(count++, login.getUsername());
-			preparedStatement.setString(count++, login.getPassword());
+			preparedStatement.setString(count++, platform.getNome());
+			preparedStatement.setString(count++, platform.getImagem());
+			preparedStatement.setInt(count++, platform.getLogin().getId());
 			return preparedStatement.executeUpdate() == 1;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -38,7 +40,7 @@ public class DaoLogin implements DaoInterface<Login> {
 	@Override
 	public boolean removeById(Integer id) {
 	      	connection = ConnectionFactory.obterConexao();
-	        String sql = SqlUtil.buildQueryDelete("login", "id_login");
+	        String sql = SqlUtil.buildQueryDelete("platform", "id_platform");
 	        try {
 	            PreparedStatement preparedStatement = connection.prepareStatement(sql);
 	            preparedStatement.setInt(1, id);
@@ -52,15 +54,15 @@ public class DaoLogin implements DaoInterface<Login> {
 	}
 
 	@Override
-	public boolean update(Login login) {
+	public boolean update(Platform platform) {
 		connection = ConnectionFactory.obterConexao();
 		int count = 1;
-		String sql = SqlUtil.buildQueryUpdate("login", "username", "password", "id_login");
+		String sql = SqlUtil.buildQueryUpdate("platform", "name", "image", "id_login");
 		try {
 			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(count++, login.getUsername());
-			preparedStatement.setString(count++, login.getPassword());
-			preparedStatement.setInt(count++, login.getId());
+			preparedStatement.setString(count++, platform.getNome());
+			preparedStatement.setString(count++, platform.getImagem());
+			preparedStatement.setInt(count++, platform.getLogin().getId());
 			return preparedStatement.executeUpdate() == 1;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -73,19 +75,21 @@ public class DaoLogin implements DaoInterface<Login> {
 	}
 
 	@Override
-	public List<Login> getAll() {
-		   List<Login> logins = new ArrayList<>();
+	public List<Platform> getAll() {
+		   List<Platform> logins = new ArrayList<>();
+		   DaoLogin daoLogin = new DaoLogin();
 	        connection = ConnectionFactory.obterConexao();
-	        String sql = SqlUtil.buildQueryGetAll("login");
+	        String sql = SqlUtil.buildQueryGetAll("platform");
 	        try {
 	            preparedStatement = connection.prepareStatement(sql);
 	            preparedStatement.execute();
 	            ResultSet resultSet = preparedStatement.getResultSet();
 	            while (resultSet.next()) {
-	                Login login = new Login();
-	                login.setId(resultSet.getInt("id_login"));
-	                login.setUsername(resultSet.getString("username"));
-	                login.setPassword(resultSet.getString("password"));
+	                Platform platform = new Platform();
+	                platform.setId(resultSet.getInt("id_platform"));
+	                platform.setNome(resultSet.getString("name"));
+	                platform.setImagem(resultSet.getString("image"));
+	                platform.setLogin(daoLogin.);
 	                logins.add(login);
 	            }
 
@@ -97,31 +101,5 @@ public class DaoLogin implements DaoInterface<Login> {
 	        return logins;
 		
 	}
-	
-	@Override
-	public Login getById(Integer id) {
-	        connection = ConnectionFactory.obterConexao();
-	        String sql = SqlUtil.buildQueryGetAllOrById("login", "id_login", id);
-	        try {
-	            preparedStatement = connection.prepareStatement(sql);
-	            preparedStatement.execute();
-	            ResultSet resultSet = preparedStatement.getResultSet();
-	            while (resultSet.next()) {
-	                Login login = new Login();
-	                login.setId(resultSet.getInt("id_login"));
-	                login.setUsername(resultSet.getString("username"));
-	                login.setPassword(resultSet.getString("password"));
-	                return login;
-	            }
-
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        } finally {
-	            ConnectionFactory.fecharConexao();
-	        }
-	        return null;
-		
-	}
-	
 
 }
