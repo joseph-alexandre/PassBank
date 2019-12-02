@@ -1,17 +1,17 @@
 package model;
 
-public class Plataforma {
+public class Platform {
 
 	private Integer id;
 	private String nome;
 	private String imagem;
 	private Login login;
 	
-	public Plataforma() {
+	public Platform() {
 		super();
 	}
 
-	public Plataforma(Integer id, String nome, String imagem, Login login) {
+	public Platform(Integer id, String nome, String imagem, Login login) {
 		super();
 		this.id = id;
 		this.nome = nome;

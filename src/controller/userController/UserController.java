@@ -10,14 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Login;
-import utils.json.JsonUtil;
+import utils.JsonUtil;
 
 @WebServlet("/user/cadastrar")
 public class UserController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
-	Login login = new Login("userBla", "passBla");
 	
 	public UserController() {
         super();
@@ -27,11 +26,7 @@ public class UserController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    	PrintWriter out = resp.getWriter();
-    	resp.setContentType("application/json");
-    	resp.setCharacterEncoding("UTF-8");
-    	out.print(JsonUtil.convertToJson(login));
-    	out.flush();
+    
     }
 
 	@Override

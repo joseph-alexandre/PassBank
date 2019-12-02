@@ -8,7 +8,7 @@ public class User {
 	private String name;
 	private String email;
 	private Login login;
-	private List<Plataforma> plataformas;
+	private Platform platform;
 	
 	
 	public User() {
@@ -16,13 +16,13 @@ public class User {
 	}
 
 
-	public User(Integer id, String name, String email, Login login, List<Plataforma> plataformas) {
+	public User(Integer id, String name, String email, Login login, Platform platform) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.login = login;
-		this.plataformas = plataformas;
+		this.platform = platform;
 	}
 
 
@@ -31,7 +31,7 @@ public class User {
 	}
 
 
-	public void setId(final Integer id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -41,7 +41,7 @@ public class User {
 	}
 
 
-	public void setName(final String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -51,7 +51,7 @@ public class User {
 	}
 
 
-	public void setEmail(final String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
@@ -61,25 +61,26 @@ public class User {
 	}
 
 
-	public void setLogin(final Login login) {
+	public void setLogin(Login login) {
 		this.login = login;
 	}
 
 
-	public List<Plataforma> getPlataformas() {
-		return plataformas;
+	public Platform getPlatform() {
+		return platform;
 	}
 
 
-	public void setPlataformas(final List<Plataforma> plataformas) {
-		this.plataformas = plataformas;
+	public void setPlatform(Platform platform) {
+		this.platform = platform;
 	}
 
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", login=" + login + ", plataformas="
-				+ plataformas + "]";
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", login=" + login + ", platform=" + platform
+				+ "]";
 	}
+
 
 }
