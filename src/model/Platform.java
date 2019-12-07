@@ -3,20 +3,19 @@ package model;
 public class Platform {
 
 	private Integer id;
-	private String nome;
-	private String imagem;
-	private Login login;
+	private String name, image, username, password;
 	
 	public Platform() {
 		super();
 	}
 
-	public Platform(Integer id, String nome, String imagem, Login login) {
+	public Platform(Integer id, String name, String image, String username, String password) {
 		super();
 		this.id = id;
-		this.nome = nome;
-		this.imagem = imagem;
-		this.login = login;
+		this.name = name;
+		this.image = image;
+		this.username = username;
+		this.password = password;
 	}
 
 	public Integer getId() {
@@ -27,34 +26,43 @@ public class Platform {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getImagem() {
-		return imagem;
+	public String getImage() {
+		return image;
 	}
 
-	public void setImagem(String imagem) {
-		this.imagem = imagem;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
-	public Login getLogin() {
-		return login;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setLogin(Login login) {
-		this.login = login;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override
 	public String toString() {
-		return "Plataforma [id=" + id + ", nome=" + nome + ", imagem=" + imagem + ", login=" + login + "]";
+		return "Platform [id=" + id + ", name=" + name + ", image=" + image + ", username=" + username + ", password="
+				+ password + "]";
 	}
 
-		
+	
 }

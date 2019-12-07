@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class ConnectionFactory {
 
-	private static String USER_ROOT = System.getProperty("user.dir");
-	private static String HOST = "jdbc:sqlite:" + USER_ROOT + "\\resources\\database\\passbank.db";
+//	private static String USER_ROOT = System.getProperty("user.dir");
+	private static String HOST = "jdbc:sqlite:C:\\Users\\Usuario\\Desktop\\Workspace\\Java\\PassBank\\resources\\database\\passbank.db";
 	private static Connection conexao;
 
 	public static Connection obterConexao() {
@@ -29,10 +29,5 @@ public class ConnectionFactory {
 		}
 	}
 	
-	
-	public static void main(String[] args) {
-		obterConexao();
-		
-	}
 
 }

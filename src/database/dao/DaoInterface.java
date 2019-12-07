@@ -1,17 +1,18 @@
 package database.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
-public interface DaoInterface<T>  {
+public interface DaoInterface<T> {
 
-    public boolean add(T thing);
-    
-    public boolean removeById(Integer id);
+	public boolean add(T thing) throws SQLException;
 
-    public boolean update(T thing);
-    
-    public T getById(Integer id);
+	public boolean removeById(Integer id) throws SQLException;
 
-    public List<T> getAll();
+	public boolean update(T thing) throws SQLException;
+
+	public T getById(Integer id) throws SQLException;
+
+	public List<T> getAll() throws SQLException;
 
 }
