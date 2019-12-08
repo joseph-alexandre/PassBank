@@ -1,14 +1,12 @@
 package controller.plataformController;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import database.connection.ConnectionFactory;
 import database.dao.DaoPlatform;
 import model.Platform;
 import utils.json.JsonUtil;
@@ -31,14 +29,12 @@ public class GetPlatformByIdController extends HttpServlet {
 				platform = daoPlatform.getById(id);
 				response.getWriter().println(JsonUtil.convertToJson(platform));
 			} else {
-				response.getWriter().println("Não existe plataforma com este id.");
+				response.getWriter().println("Não existe Plataforma com este id.");
 			}
 			
 		} catch (Exception e) {
-			response.getWriter().println("Não foi possível listar a plataforma.");
+			response.getWriter().println("Não foi possível listar a Plataforma.");
 			
-		} finally {
-			ConnectionFactory.fecharConexao();
 		}
 	}
 	

@@ -1,4 +1,4 @@
-package controller.userController;
+package controller.recordController;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,33 +8,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import database.connection.ConnectionFactory;
-import database.dao.DaoUser;
-import model.User;
+import database.dao.DaoRecord;
+import model.Record;
 import utils.json.JsonUtil;
 
-@WebServlet("/user/list/*")
-public class GetUserByIdController extends HttpServlet {
+@WebServlet("/record/list/*")
+public class GetRecordByIdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public GetUserByIdController() {
+    public GetRecordByIdController() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		DaoUser daoUser = new DaoUser();
-		User user = new User();
+		DaoRecord daoRecord = new DaoRecord();
+		Record record = new Record();
 		try {
 			Integer id = Integer.parseInt(request.getParameter("id"));
-			if(daoUser.getById(id) != null) {
-				user = daoUser.getById(id);
-				response.getWriter().println(JsonUtil.convertToJson(user));
+			if(daoRecord.getById(id) != null) {
+				record = daoRecord.getById(id);
+				response.getWriter().println(JsonUtil.convertToJson(record));
 			} else {
-				response.getWriter().println("Não existe usuário com este id.");
+				response.getWriter().println("Não existe registro com este id.");
 			}
 			
 		} catch (Exception e) {
-			response.getWriter().println("Não foi possível listar o usuário.");	
+			response.getWriter().println("Não foi possível listar o registro.");	
 		} finally {
 			ConnectionFactory.fecharConexao();
 		}

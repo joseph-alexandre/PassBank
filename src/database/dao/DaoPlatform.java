@@ -9,7 +9,6 @@ import java.util.List;
 
 import database.connection.ConnectionFactory;
 import model.Platform;
-import model.User;
 import utils.SqlUtil;
 
 public class DaoPlatform implements DaoInterface<Platform> {
@@ -47,13 +46,14 @@ public class DaoPlatform implements DaoInterface<Platform> {
 	public boolean update(Platform platform) throws SQLException {
 		connection = ConnectionFactory.obterConexao();
 		int count = 1;
-		String sql = SqlUtil.buildQueryUpdate("platform", "name", "image", "username", "password");
+		String sql = SqlUtil.buildQueryUpdate("platform", "name", "image", "username", "password", "id_platform");
 		
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(count++, platform.getName());
 			preparedStatement.setString(count++, platform.getImage());
 			preparedStatement.setString(count++, platform.getUsername());
 			preparedStatement.setString(count++, platform.getPassword());
+			preparedStatement.setInt(count++, platform.getId());
 			return preparedStatement.executeUpdate() == 1;
 	}
 
@@ -84,7 +84,7 @@ public class DaoPlatform implements DaoInterface<Platform> {
 
 		Platform platform = new Platform();
 		connection = ConnectionFactory.obterConexao();
-		String sql = SqlUtil.buildQueryGetAllOrById("platform", "id_platform", id);
+		String sql = "SELECT * FROM platform WHERE id_platform = " + id;
 		preparedStatement = connection.prepareStatement(sql);
 		preparedStatement.execute();
 		ResultSet resultSet = preparedStatement.getResultSet();
@@ -98,20 +98,5 @@ public class DaoPlatform implements DaoInterface<Platform> {
 		}
 
 		return null;
-	}
-	
-	
-	
-	
-	public static void main(String[] args) {
-	
-		DaoPlatform daoPlatform = new DaoPlatform();
-		try {
-			System.out.println(daoPlatform.getById(1));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
 	}
 }

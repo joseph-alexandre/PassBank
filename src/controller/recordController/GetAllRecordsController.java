@@ -1,37 +1,35 @@
-package controller.plataformController;
+package controller.recordController;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import database.connection.ConnectionFactory;
-import database.dao.DaoPlatform;
-import model.Platform;
+import database.dao.DaoRecord;
+import model.Record;
 import utils.json.JsonUtil;
 
-@WebServlet("/platform/list")
-public class GetAllPlatformsController extends HttpServlet {
+@WebServlet("/record/list")
+public class GetAllRecordsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
      
-    public GetAllPlatformsController() {
+    public GetAllRecordsController() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		DaoPlatform daoPlatform = new DaoPlatform();
-		List<Platform> platforms = new ArrayList<>();
+		DaoRecord daoRecord = new DaoRecord();
+		List<Record> records = new ArrayList<>();
 		try {
-			platforms.addAll(daoPlatform.getAll());
-			response.getWriter().println(JsonUtil.convertToJson(platforms));
+			records.addAll(daoRecord.getAll());
+			response.getWriter().println(JsonUtil.convertToJson(records));
 		} catch (Exception e) {
-			response.getWriter().println("Não foi possível listar as plataformas.");
+			response.getWriter().println("Não foi possível listar os registros.");
 			
 		} finally {
 			ConnectionFactory.fecharConexao();

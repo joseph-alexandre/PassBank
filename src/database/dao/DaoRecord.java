@@ -43,11 +43,12 @@ public class DaoRecord implements DaoInterface<Record> {
 	public boolean update(Record record) throws SQLException {
 		connection = ConnectionFactory.obterConexao();
 		int count = 1;
-		String sql = SqlUtil.buildQueryUpdate("record", "id_platform", "id_user");
+		String sql = SqlUtil.buildQueryUpdate("record", "id_platform", "id_user", "id_record");
 
 		preparedStatement = connection.prepareStatement(sql);
 		preparedStatement.setInt(count++, record.getId_platform());
 		preparedStatement.setInt(count++, record.getId_user());
+		preparedStatement.setInt(count++, record.getId());
 		return preparedStatement.executeUpdate() == 1;
 
 	}

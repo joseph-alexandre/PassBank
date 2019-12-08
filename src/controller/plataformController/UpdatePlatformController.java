@@ -1,4 +1,4 @@
-package controller.userController;
+package controller.plataformController;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,18 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import com.google.gson.Gson;
-
 import database.connection.ConnectionFactory;
-import database.dao.DaoUser;
-import model.User;
+import database.dao.DaoPlatform;
+import model.Platform;
 import utils.json.JsonUtil;
-import utils.json.adapters.UserAdapter;
+import utils.json.adapters.PlatformAdapter;
 
-@WebServlet("/user/update/*")
-public class UpdateUserController extends HttpServlet {
+
+@WebServlet("/platform/update/*")
+public class UpdatePlatformController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public UpdateUserController() {
+	public UpdatePlatformController() {
 		super();
 	}
 
@@ -25,20 +25,20 @@ public class UpdateUserController extends HttpServlet {
 	protected void doPut(HttpServletRequest req, javax.servlet.http.HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		Gson jsonUtil = JsonUtil.registerAdapter(new User(), new UserAdapter());
-		DaoUser daoUser = new DaoUser();
-		User user = new User();
+		Gson jsonUtil = JsonUtil.registerAdapter(new Platform(), new PlatformAdapter());
+		DaoPlatform daoPlatform = new DaoPlatform();
+		Platform platform = new Platform();
 		
 		try {
 			req.setCharacterEncoding("UTF-8");
 			String json = JsonUtil.readJsonFromRequest(req);
-			user = (User) jsonUtil.fromJson(json, User.class);
-			user.setId(Integer.parseInt(req.getParameter("id")));
+			platform = (Platform) jsonUtil.fromJson(json, Platform.class);
+			platform.setId(Integer.parseInt(req.getParameter("id")));
 			
-			if(daoUser.update(user)) {
-				resp.getWriter().println("Usuário atualizado com sucesso.");	
+			if(daoPlatform.update(platform)) {
+				resp.getWriter().println("Plataforma atualizada com sucesso.");	
 			} else {
-				resp.getWriter().println("Não foi possível atualizar o usuário.");
+				resp.getWriter().println("Não foi possível atualizar a plataforma.");
 			}
 			
 		} catch (Exception e) {
